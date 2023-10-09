@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     border: 1px solid black;
-    
+    background-color: azure; 
 }
 
 .logo {
@@ -17,16 +17,19 @@
 }
 
 .nav-items >ul > li {
-    margin: 0px 100px;
+    margin: 0px 70px;
 }
 
 .Hot-card {
     width: 100%;
     width: 200px;
+    height: 400px;
     text-align: center;
     margin: 5px;
     background-color: azure;
-    
+    overflow: hidden;
+    background: azure;
+    text-decoration: none;
 }
 
 .Hot-card:hover {
@@ -91,4 +94,14 @@
 .search-btn {
     background-color: blue;
     font-size: large;
+}
+.para {
+    text-align: center;
+    text-shadow: 1cap;
+}
+.head{
+    text-align: center;
+    font: 5em sans-serif;
+    border: 1px solid black;
+    cursor: pointer;
 }

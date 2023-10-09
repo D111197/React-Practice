@@ -1,6 +1,8 @@
 import HotelCard from "./HotelCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+import useOnlineStatus from "../utiles/Hooks/useOnlineStatus";
 const Body = () => {
 
  const [Listofhotels, setListofhotels] = useState([]);
@@ -18,13 +20,18 @@ const Body = () => {
   const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.4889075&lng=77.2991067&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
   );
   const json = await data.json();
-  
-  console.log(json)
   setListofhotels(json.data.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   setFilterListofhotels(json.data.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
 
  }
    
+ const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false) {
+    return <h1>Looks like Internet is not working pleasec check your internet connection</h1>;
+  }
+
+
 
   return Listofhotels.length === 0 ? (<Shimmer /> ) :
   (
@@ -53,7 +60,11 @@ const Body = () => {
       </div>
       <div className="hotel-container">
         {FilterListofhotels.map((hotel) => (
-          <HotelCard key={hotel.info.id} hotdata={hotel} />
+        <Link style={{ textDecoration: 'none' , color: 'black'}}
+        key={hotel.info.id} 
+        to={"/hotels/"+ hotel.info.id}> 
+        <HotelCard hotdata={hotel} />
+         </Link>
         ))}
       </div>
     </div>
